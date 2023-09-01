@@ -1,0 +1,19 @@
+version: "3"
+services:
+  test-postgres-service:
+    image: "postgres"
+    container_name: "project_db"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=projectdb
+    ports:
+      - "5432:5432"
+  pgadmin-service:
+    image: "dpage/pgadmin4"
+    container_name: "pgadmin2"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=postgres@test.com
+      - PGADMIN_DEFAULT_PASSWORD=postgres
+    ports:
+      - "82:80"
