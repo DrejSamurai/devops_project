@@ -28,6 +28,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public ProjectDTO modelToDto(Project project) {
         ProjectDTO projectDTO = new ProjectDTO();
+        projectDTO.setId(project.getId());
         projectDTO.setName(project.getName());
         projectDTO.setDescription(project.getDescription());
         projectDTO.setDateBeginning(project.getDateBeginning());
