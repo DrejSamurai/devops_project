@@ -32,6 +32,7 @@ public class ProjectServiceImpl implements ProjectService {
         projectDTO.setDescription(project.getDescription());
         projectDTO.setDateBeginning(project.getDateBeginning());
         projectDTO.setDateEnding(project.getDateEnding());
+        projectDTO.setIsActive(project.getIsActive());
         return projectDTO;
     }
 

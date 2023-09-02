@@ -1,19 +1,33 @@
-version: "3"
+version: "3.1"
 services:
-  test-postgres-service:
-    image: "postgres"
-    container_name: "project_db"
+  backend:
+    build:
+      context: .
+    container_name: backend
+    depends_on:
+      - projectdb-postgres-service
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://projectdb:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - "8888:8888"
+
+  projectdb-postgres-service:
+    image: "postgres:latest"
+    container_name: "projectdb"
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=projectdb
     ports:
-      - "5432:5432"
+      - "5433:5433"
+
   pgadmin-service:
     image: "dpage/pgadmin4"
     container_name: "pgadmin2"
     environment:
-      - PGADMIN_DEFAULT_EMAIL=postgres@test.com
+      - PGADMIN_DEFAULT_EMAIL=postgres
       - PGADMIN_DEFAULT_PASSWORD=postgres
     ports:
       - "82:80"
