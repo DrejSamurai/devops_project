@@ -3,7 +3,7 @@ name: docker-build-and-push
 on:
   push:
     branches:
-      - 'master'
+      - 'kubernete-helm'
 
 jobs:
   build:
@@ -20,4 +20,21 @@ jobs:
         name: Build and push
         run: |
           docker build -t drejsamurai/devops_project ./project_manager_backend
-          docker push drejsamurai/devops_project
+          docker push drejsamurai/devops_project          
+  deploy:
+        needs: build
+        runs-on:
+            - self-hosted
+            - label-1
+        steps:
+            - uses: actions/checkout@v2
+            
+            - name: Run scripts
+              run: |
+                cd ../devops_project
+                git pull origin kubernete-helm
+                git checkout kubernete-helm
+                cd k8s
+                helm upgrade --install projectdb-chart projectdb-chart
+                helm upgrade --install project-manager-backend-chart project-manager-backend-chart
+                kubectl rollout restart deployment backenddeployment
