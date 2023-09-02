@@ -19,5 +19,5 @@ jobs:
       -
         name: Build and push
         run: |
-          docker build -t drejsamurai/backend ./backend
-          docker push drejsamurai/backend
+          docker build -t drejsamurai/devops_project ./project_manager_backend
+          docker push drejsamurai/devops_project
