@@ -1,0 +1,11 @@
+backend:
+  name: backend
+  serviceName: backendservice
+  deploymentName: backenddeployment
+  image: drejsamurai/devops_project
+  tag: latest
+  restartPolicy: Always
+  port: 8080
+  service:
+    name: backendservice
+    port: 8080

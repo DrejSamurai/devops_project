@@ -1,0 +1,13 @@
+postgres:
+  name: postgres-db
+  serviceName: postgres-service
+  deploymentName: postgres-deployment
+  postgres:
+    app: postgres
+    tier: postgres
+  image: postgres
+  tag: latest
+  restartPolicy: Always
+  port: 5432
+  service:
+    name: postgres-service
